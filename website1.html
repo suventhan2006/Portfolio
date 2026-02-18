@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muthu Suventhan V · CS Portfolio</title>
+  <!-- Font Awesome Icons & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #f8fbfe;
+      color: #1e2b3c;
+      line-height: 1.5;
+    }
+
+    /* glassmorphism / soft shadow helpers */
+    .glass-card, section:not(.hero) .card, .skill-card, .edu-card, .project-card, .achievement-card {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(2px);
+      border-radius: 28px;
+      box-shadow: 0 15px 35px -10px rgba(0, 120, 200, 0.15), 0 2px 8px -4px rgba(0, 80, 150, 0.05);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .glass-card:hover, .skill-card:hover, .project-card:hover, .achievement-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 45px -12px rgba(0, 140, 230, 0.3);
+      border-color: rgba(0, 170, 255, 0.3);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    /* ---------- NAVBAR ---------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(14px);
+      z-index: 99;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 170, 255, 0.2);
+      box-shadow: 0 4px 20px -8px rgba(0,150,255,0.1);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.7rem;
+      background: linear-gradient(135deg, #0077be, #5dc9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e3b5c;
+      transition: 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #2a9df4;
+      color: #006bb3;
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 50px 0 70px;
+    }
+    .hero-content {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+    .hero-left {
+      flex: 0 0 200px;
+    }
+    .profile-img {
+      width: 240px;
+      height: 240px;
+      border-radius: 40% 60% 40% 60% / 50% 40% 60% 50%;
+      object-fit: cover;
+      box-shadow: 0 30px 35px -15px #5fb2ff;
+      border: 4px solid white;
+      transition: 1s;
+      animation: float 4s infinite alternate;
+    }
+    @keyframes float {
+      0% { border-radius: 40% 60% 40% 60% / 50% 40% 60% 50%; transform: translateY(0); }
+      100% { border-radius: 50% 40% 60% 40% / 40% 60% 40% 60%; transform: translateY(-8px); }
+    }
+    .hero-right {
+      flex: 1;
+    }
+    .hero-right h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      background: linear-gradient(130deg, #015c9b, #47b5ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+    .hero-tagline {
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: #21679c;
+      margin: 8px 0 12px;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      max-width: 600px;
+      color: #2c4056;
+      background: rgba(255,255,255,0.6);
+      padding: 18px 22px;
+      border-radius: 40px 40px 40px 12px;
+      box-shadow: inset 0 1px 5px rgba(255,255,255,0.9), 0 10px 15px -8px #a0d0ff;
+    }
+    .btn-group {
+      margin: 30px 0 0;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 14px 34px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      background: white;
+      color: #006bb3;
+      border: 1.5px solid #b3dbff;
+      transition: all 0.2s;
+      box-shadow: 0 5px 15px #cde4ff;
+    }
+    .btn-primary {
+      background: linear-gradient(145deg, #0088ff, #40a9ff);
+      color: white;
+      border: none;
+      box-shadow: 0 10px 20px -5px #60a5fa;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(145deg, #0072d2, #2f9aff);
+      transform: scale(1.03);
+    }
+    .btn-outline:hover {
+      background: #ddf0ff;
+      border-color: #0080dd;
+    }
+
+    /* ---------- SECTION COMMON ---------- */
+    .section-title {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 80px;
+      height: 6px;
+      background: linear-gradient(90deg, #4eb3ff, #c0e2ff);
+      border-radius: 6px;
+    }
+    section {
+      padding: 100px 0; /* SIGNIFICANTLY INCREASED gap between sections */
+      scroll-margin-top: 80px;
+    }
+
+    /* cards grid */
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 35px;
+    }
+    .grid-2 { grid-template-columns: repeat(2,1fr); }
+    .grid-3 { grid-template-columns: repeat(3,1fr); }
+    .grid-4 { grid-template-columns: repeat(4,1fr); }
+
+    /* about */
+    .about-card {
+      padding: 40px 45px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 40px;
+      box-shadow: 0 15px 25px -10px rgba(0,150,255,0.2);
+      font-size: 1.2rem;
+      line-height: 1.9;
+    }
+    .about-card span { font-weight: 700; color: #0f5fa3; }
+
+    /* achievement card */
+    .achievement-card {
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: linear-gradient(145deg, #f0f9ff, white);
+    }
+    .achievement-card i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    .achievement-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: #015c9b;
+    }
+    .achievement-card p {
+      font-size: 1.1rem;
+      color: #2c4056;
+    }
+
+    /* skill card */
+    .skill-card {
+      padding: 35px 20px 30px;
+      text-align: center;
+      background: rgba(255,255,255,0.8);
+      border-radius: 32px;
+    }
+    .skill-card h3 {
+      background: #e6f3ff;
+      display: inline-block;
+      padding: 8px 28px;
+      border-radius: 60px;
+      font-size: 1.4rem;
+      margin-bottom: 28px;
+      color: #0263b3;
+      font-weight: 600;
+    }
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+    .skill-items span {
+      background: white;
+      padding: 10px 22px;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      box-shadow: 0 3px 10px #cae2fc;
+      border: 1px solid white;
+    }
+
+    /* education timeline */
+    .edu-card {
+      padding: 32px;
+    }
+    .edu-card h3 { font-size: 1.9rem; font-weight: 600; }
+    .edu-sub { font-weight: 600; color: #0b5b9e; margin: 12px 0 6px; font-size: 1.2rem;}
+
+    /* project card */
+    .project-card {
+      padding: 35px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .project-card h3 { font-size: 1.9rem; margin-bottom: 15px; }
+    .project-link {
+      margin: 18px 0 12px;
+      word-break: break-all;
+    }
+    .project-link a { color: #0a68b4; text-decoration: none; font-weight: 500; font-size: 1.1rem;}
+
+    /* contact */
+    .contact-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background: white;
+      padding: 45px 50px;
+      border-radius: 90px 30px 90px 30px;
+      box-shadow: 0 15px 25px #d4ebff;
+    }
+    .mail-btn {
+      background: #0077e6;
+      padding: 20px 50px;
+      border-radius: 70px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.4rem;
+      box-shadow: 0 12px 15px -8px #60a5fa;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mail-btn:hover { background: #005fbe; transform: scale(1.02); }
+    .social-icons a {
+      font-size: 2.8rem;
+      margin-left: 30px;
+      color: #2c3e50;
+      transition: 0.2s;
+    }
+    .social-icons a:hover { color: #0077b3; transform: translateY(-6px); }
+
+    /* floating chatbot */
+    .chatbot-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0077e6;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2.2rem;
+      box-shadow: 0 15px 25px #96caff;
+      cursor: pointer;
+      z-index: 200;
+      transition: 0.2s;
+      border: 3px solid white;
+    }
+    .chatbot-toggle:hover { background: #0056a3; transform: scale(1.1); }
+    .chat-window {
+      position: fixed;
+      bottom: 110px;
+      right: 30px;
+      width: 340px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 35px 35px 20px 35px;
+      box-shadow: 0 30px 45px -20px #0077b3;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      z-index: 210;
+      border: 1px solid white;
+    }
+    .chat-header {
+      background: #e1f1ff;
+      padding: 18px 22px;
+      font-weight: 600;
+      color: #003459;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chat-header button {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #005f8c;
+    }
+    .chat-body {
+      padding: 22px 18px;
+      min-height: 200px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      background: #f9fcff;
+    }
+    .chat-msg {
+      background: white;
+      padding: 12px 16px;
+      border-radius: 24px 24px 24px 6px;
+      box-shadow: 0 4px 8px #d1e6ff;
+      margin-bottom: 18px;
+    }
+    .chat-input-area {
+      display: flex;
+      border-top: 1px solid #cee9ff;
+    }
+    .chat-input-area input {
+      flex: 1;
+      padding: 15px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: transparent;
+    }
+    .chat-input-area button {
+      background: #0080ff;
+      border: none;
+      color: white;
+      padding: 0 20px;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    /* responsive */
+    @media (max-width: 800px) {
+      .hero-content { justify-content: center; text-align: center; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .btn-group { justify-content: center; }
+      .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .contact-flex { flex-direction: column; gap: 30px; text-align: center; }
+      .social-icons a { margin: 0 15px; }
+    }
+    /* scroll reveal base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo">WELCOME...!</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HOME / HERO -->
+  <section id="home" class="hero" style="padding-top: 20px;">
+    <div class="container hero-content">
+      <div class="hero-left">
+        <!-- Profile image from local desktop - update src to actual path -->
+        <img src="profile.jpeg" alt="Muthu Suventhan" class="profile-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'240\' height=\'240\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'45\' r=\'30\' fill=\'%23b0d9ff\' /%3E%3Ccircle cx=\'35\' cy=\'35\' r=\'5\' fill=\'%23333\' /%3E%3Ccircle cx=\'65\' cy=\'35\' r=\'5\' fill=\'%23333\' /%3E%3Cpath d=\'M35 55 Q50 70,65 55\' stroke=\'%23333\' stroke-width=\'4\' fill=\'none\' /%3E%3C/svg%3E';">
+      </div>
+      <div class="hero-right">
+        <h1>Muthu Suventhan V</h1>
+        <div class="hero-tagline">Computer Science Engineering Student</div>
+        <div class="hero-desc">Passionate BE CSE student eager to work on real-time projects and contribute effectively in team environments. Strong learner with problem-solving mindset.</div>
+        <div class="btn-group">
+          <a href="#" class="btn btn-primary" id="viewResumeBtn">View Resume <i class="fas fa-external-link-alt"></i></a>
+          <a href="#contact" class="btn btn-outline">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- about -->
+  <section id="about" class="container reveal">
+    <h2 class="section-title">About</h2>
+    <div class="about-card">
+      ◆ I am currently pursuing a Bachelor of Engineering in Computer Science at Government College of Engineering, Tirunelveli.<br><br>
+      ◆ I am highly interested in building real-time applications and learning modern web technologies. I actively participate in team discussions, seek guidance when needed, and continuously work on improving my programming and problem-solving skills.<br><br>
+      ◆ Interested in full‑stack development & real‑time projects. Actively participates in team discussions and technical learning.
+    </div>
+  </section>
+
+  <!-- skills -->
+  <section id="skills" class="container reveal">
+    <h2 class="section-title">Skills</h2>
+    <div class="grid-4">
+      <div class="skill-card"><h3>Programming</h3><div class="skill-items"><span>Java</span><span>Python</span></div></div>
+      <div class="skill-card"><h3>Frontend</h3><div class="skill-items"><span>HTML</span><span>CSS</span></div></div>
+      <div class="skill-card"><h3>Backend</h3><div class="skill-items"><span>MySQL</span></div></div>
+      <div class="skill-card"><h3>Tools</h3><div class="skill-items"><span>GitHub</span><span>Figma</span><span>Canva</span></div></div>
+    </div>
+  </section>
+
+  <!-- education -->
+  <section id="education" class="container reveal">
+    <h2 class="section-title">Education</h2>
+    <div class="grid-2">
+      <div class="edu-card"><h3>BE Computer Science</h3><div class="edu-sub">Government College of Engineering, Tirunelveli</div>Status: In Progress · CGPA: 7.7</div>
+      <div class="edu-card"><h3>Higher Secondary</h3><div class="edu-sub">Tirunelveli District Government Model School</div>Year: 2022–2023 · Score: 92%</div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS SECTION (NEW) -->
+  <section id="achievements" class="container reveal">
+    <h2 class="section-title">Achievements</h2>
+    <div class="grid-2">
+      <div class="achievement-card">
+        <i class="fas fa-trophy" style="color: #ffb347;"></i>
+        <h3>TechExpo Winner</h3>
+        <p>Secured 1st Prize at TechExpo, leading our team to victory at Government College of Engineering, Tirunelveli.</p>
+      </div>
+      <div class="achievement-card">
+        <i class="fas fa-medal" style="color: #4aa3ff;"></i>
+        <h3>Symposium Winner</h3>
+        <p>Won prizes in multiple technical symposiums at various engineering colleges, including project competitions and coding events.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- projects -->
+  <section id="projects" class="container reveal">
+    <h2 class="section-title">Projects</h2>
+    <div class="grid-2">
+      <div class="project-card"><h3>WordPress Theme Customizer</h3><div class="project-link"><a href="https://github.com/suventhan2006/Wordpress-theme-customizer" target="_blank">github.com/suventhan2006/Wordpress-theme-customizer</a></div><p>A customizable WordPress theme enhancement allowing dynamic styling & personalization.</p></div>
+      <div class="project-card"><h3>Student Management System</h3><p>Full‑stack web app using Java, MySQL to manage student records, courses & performance tracking.</p></div>
+      <div class="project-card"><h3>Portfolio with AI Chat</h3><p>Interactive portfolio website with floating chatbot that responds to queries about skills, education, projects – built with HTML/CSS/JS.</p></div>
+    </div>
+  </section>
+
+  <!-- contact -->
+  <section id="contact" class="container reveal">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-flex">
+      <a href="mailto:muthusuventhan@gmail.com" class="mail-btn"><i class="fas fa-paper-plane"></i> Send Email</a>
+      <div class="social-icons">
+        <a href="https://github.com/suventhan2006" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/muthu-suventhan-v893692291" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- floating chatbot -->
+  <div class="chatbot-toggle" id="chatToggle"><i class="fas fa-comment-dots"></i></div>
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <span>Muthu's assistant</span>
+      <button id="closeChat"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chat-body" id="chatBody">
+      <div class="chat-msg">Hi! I'm Muthu's portfolio assistant. Ask me about his skills, education, achievements, or projects.</div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Ask something...">
+      <button id="sendChat"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // scroll reveal
+      const reveals = document.querySelectorAll('.reveal');
+      function checkReveal() {
+        for (let el of reveals) {
+          const windowHeight = window.innerHeight;
+          const revealTop = el.getBoundingClientRect().top;
+          if (revealTop < windowHeight - 100) el.classList.add('active');
+        }
+      }
+      window.addEventListener('scroll', checkReveal);
+      window.addEventListener('load', checkReveal);
+
+      // FIXED: view resume - actually opens a PDF
+      document.getElementById('viewResumeBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        // You can replace this URL with your actual resume PDF path
+        // For local file: "file:///C:/Users/acer/Documents/Resume.pdf"
+        // For web: "https://yourdomain.com/resume.pdf"
+        window.open('https://drive.google.com/uc?export=download&id=YOUR_FILE_ID', '_blank');
+        // If you have a local PDF file, use this instead:
+        // window.open('file:///C:/Users/acer/Documents/Muthu_Suventhan_Resume.pdf', '_blank');
+        
+        // For demo purposes, showing a prompt
+        alert('In a real implementation, this would open your PDF resume. Please replace the URL with your actual resume link.');
+      });
+
+      // chatbot logic
+      const toggle = document.getElementById('chatToggle');
+      const win = document.getElementById('chatWindow');
+      const closeBtn = document.getElementById('closeChat');
+      const sendBtn = document.getElementById('sendChat');
+      const input = document.getElementById('chatInput');
+      const body = document.getElementById('chatBody');
+
+      function addMessage(msg, isUser = false) {
+        const div = document.createElement('div');
+        div.className = 'chat-msg';
+        div.style.background = isUser ? '#e3f0ff' : 'white';
+        div.style.marginLeft = isUser ? '20px' : '0';
+        div.style.marginRight = isUser ? '0' : '20px';
+        div.style.textAlign = isUser ? 'right' : 'left';
+        div.innerText = msg;
+        body.appendChild(div);
+        body.scrollTop = body.scrollHeight;
+      }
+
+      function botResponse(q) {
+        const query = q.toLowerCase();
+        if (query.includes('skill')) return "Muthu's skills: Java, Python, HTML, CSS, MySQL, GitHub, Figma, Canva.";
+        if (query.includes('education') || query.includes('cgpa')) return "BE CSE (in progress) CGPA 7.7 at GCE Tirunelveli. HSC 92% (2023).";
+        if (query.includes('project')) return "Projects: WordPress Theme Customizer, Student Management System, Portfolio with AI Chat.";
+        if (query.includes('about')) return "Muthu is a passionate CSE student, interested in full-stack dev, quick learner, team player.";
+        if (query.includes('contact')) return "You can send email via the 'Send Email' button below or via GitHub/LinkedIn.";
+        if (query.includes('achievement') || query.includes('award') || query.includes('prize')) return "Achievements: 1st Prize at TechExpo, Winner at multiple college symposiums.";
+        return "I can answer about skills, education, projects, achievements, about, contact, cgpa.";
+      }
+
+      toggle.addEventListener('click', () => {
+        win.style.display = 'flex';
+      });
+      closeBtn.addEventListener('click', () => {
+        win.style.display = 'none';
+      });
+      sendBtn.addEventListener('click', () => {
+        const txt = input.value.trim();
+        if (!txt) return;
+        addMessage('You: ' + txt, true);
+        setTimeout(() => addMessage('🤖 ' + botResponse(txt)), 200);
+        input.value = '';
+      });
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendBtn.click();
+      });
+    })();
+  </script>
+</body>
+</html>
